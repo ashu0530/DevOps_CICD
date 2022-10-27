@@ -1,0 +1,12 @@
+---
+- hosts: kubernetes
+  user: root
+  tasks:
+      - name: deploy regapp on eks cluster
+        command: kubectl apply -f regapp-deployment.yml
+
+      - name: create service for regapp loadbancer
+        command: kubectl apply -f regapp-service.yml
+
+      - name: To rolling update
+        command: kubectl rollout restart deployment.apps/deployment-regapp  

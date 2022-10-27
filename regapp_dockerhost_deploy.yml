@@ -1,0 +1,21 @@
+---
+- hosts: docker
+  tasks:
+
+  
+
+  - name: Stopping the regapp-server container
+    command: docker stop regapp-server
+    ignore_errors: yes
+
+  - name: Removing the regapp-server container
+    command: docker rm regapp-server
+    ignore_errors: yes
+
+  - name: Remove the regapp:dockerhost image
+    command: docker rmi ashu0530/regapp
+    ignore_errors: yes
+
+  - name: Deploying and creating container on docker host
+    command: docker run -d --name regapp-server -p 8081:8080 ashu0530/regapp:latest
+    
